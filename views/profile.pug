@@ -1,0 +1,17 @@
+html
+	head
+	body(id="profileBody")
+		h2(id="profileH2")  Dit is #{user}'s Profiel!
+		include navbar
+		h4 Post your message:
+		p
+			include messages
+	style.
+		.profileH1{
+		display: block;
+		background-color: #7E97B2;
+		padding : 4px;
+		}
+		#profileBody{
+		background-color:#678BB2;
+		}

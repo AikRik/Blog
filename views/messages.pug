@@ -1,0 +1,28 @@
+html
+	head
+		script(src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+		crossorigin="anonymous")
+
+	body
+		form(method="POST", action="/messages", autocomplete="off")
+			label Title : 
+				input(type=text, name="title", placeholder="Title") 
+			br
+			label Message : 
+				input(type=text, name="message", placeholder="Message")
+			br
+			button(type="submit", value= "Submit") Submit
+
+		h3 All Messages Board:
+		p
+			each item in result
+				each value, key in item
+					div(id="allMsg")
+						p #{key}: #{value}
+	style.
+		#allMsg{
+		float:left;
+		width: 30%;
+		position: relative;
+		box-sizing: border-box;
+		}

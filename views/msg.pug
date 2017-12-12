@@ -1,0 +1,13 @@
+html
+	body
+		include navbar
+
+
+		h2 Your specified User:
+		p #{firstname}
+		p #{lastname}
+		p #{email}
+		h2 Your messages:
+		each item in match
+			each value, key in item
+				p #{key}: #{value}
