@@ -31,11 +31,11 @@ module.exports = (app, client, bcrypt) => {
                 client.query(userCheck, (err, result) => {
 
 
-                    if (result.rows != 0) {
+                    // if (result.rows != 0) {
 
-                        res.render("signup")
+                    //     res.render("signup")
 
-                    } else {
+                    // } else {
                         client.query(insertNewUser, (err, result2) => {
                             if (err) {
                                 throw err
@@ -44,8 +44,8 @@ module.exports = (app, client, bcrypt) => {
                             }
 
                         })
-                    }
-                })
+                //     }
+                // })
                 bcrypt.compare(password, hash, function(err, res) {});
             });
         });
