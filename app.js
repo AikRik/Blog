@@ -36,7 +36,6 @@ require("./routes/posts.js")(app,client)
 require("./routes/userMessages.js")(app,client)
 require("./routes/msg.js")(app,client)
 
-app.listen(3002,  function(){
-	console.log("Listening on 3002")
+app.listen(process.env.webport,  function(){
+	console.log("Listening on :80")
 })
-// process.env.webport,

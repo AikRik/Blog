@@ -22,14 +22,3 @@ module.exports=(posts,client)=>{
         })
     })
 }
-
-
-// SELECT users.name, agg( post.title)
-// FROM users
-// LEFT JOIN posts
-// ON users.id = posts.user_id
-
-
-// SELECT tags.name, post.title, post.body FROM tags_posts LEFT JOIN tag_posts ON tags.id= tag.posts.tag_id
-// LEFT JOIN posts
-// ON tags_post.post_id=post.id
