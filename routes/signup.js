@@ -31,7 +31,7 @@ module.exports = (app, client, bcrypt) => {
                 client.query(userCheck, (err, result) => {
 
 
-                    if (result.rows != 0) {
+                    if (result.rows > 0) {
 
                         res.render("signup")
 
