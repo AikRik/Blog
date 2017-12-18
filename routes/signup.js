@@ -35,7 +35,8 @@ module.exports = (app, client, bcrypt) => {
 
                     //     res.render("signup")
 
-                    // } else {
+                    // }
+                     if {
                         client.query(insertNewUser, (err, result2) => {
                             if (err) {
                                 throw err
@@ -44,7 +45,7 @@ module.exports = (app, client, bcrypt) => {
                             }
 
                         })
-                //     }
+                    }
                 // })
                 bcrypt.compare(password, hash, function(err, res) {});
             });
