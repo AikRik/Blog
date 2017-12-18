@@ -1,31 +1,43 @@
-module.exports=(app, client)=>{
+module.exports=(app, client, bcrypt)=>{
 
 	app.get("/login", (req,res)=> {
 	  res.render("login")
 	}),  
 
 	app.post("/login", (req, res)=>{
-			const loginUser = {
-				text: `SELECT * FROM users WHERE username = '${req.body.username}' AND password = '${req.body.password}'` 
-			}
-			
 
-			client.query(loginUser, (err, response)=>{
+		var password = req.body.password
 			
-			console.log("HEY", response)
-			
-			if (err){
-				throw err
-			}
-			else if(response.rows[0].username === req.body.username && response.rows[0].password === req.body.password){
-				req.session.user = response.rows[0]
-				res.redirect("profile")
+		const loginUser = {
+			text: `SELECT * FROM users WHERE username = '${req.body.username}'` 
+		}
 
+		client.query(loginUser, (err, response)=>{
+		
+			if(response.rows > 0){
+			var hash = response.rows[0].password
+
+				bcrypt.compare(password, hash, function(err, result) {	
+
+
+					if (err){
+						throw err
+					}
+
+					else if(response.rows[0].username === req.body.username && result === true){
+						req.session.user = response.rows[0]
+						res.redirect("profile")
+					}
+
+					else{
+						res.render("index")
+					}
+				})
 			}
 			else{
 				res.render("index")
+				
 			}
-			})
+		})
 	})
 }
-

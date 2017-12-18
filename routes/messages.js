@@ -16,6 +16,7 @@ module.exports= (messages, client) =>{
 })
 
 messages.post("/messages", (req, res) => {
+    console.log("Session Check", req.session.user)
     var title = req.body.title
     var body = req.body.message
     var user = req.session.user.id

@@ -1,5 +1,7 @@
 html
 	head
+		style
+			include standard.css
 	body(id="profileBody")
 		h2(id="profileH2")  Dit is #{user}'s Profiel!
 		include navbar
@@ -9,9 +11,10 @@ html
 	style.
 		.profileH1{
 		display: block;
-		background-color: #7E97B2;
+		background-color: gray;
 		padding : 4px;
 		}
+
 		#profileBody{
-		background-color:#678BB2;
+		background-color:#e0d9d9;
 		}

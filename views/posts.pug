@@ -1,7 +1,10 @@
 html
 	head
+		style
+			include standard.css
 	body
-		form(method="POST", action="/posts", autocomplete="off")
+		include navbar
+		form(method="POST", action="/messages", autocomplete="off")
 			label Title Comment: 
 				input(type=text, name="title", placeholder="Title") 
 			br

@@ -1,15 +1,16 @@
-module.exports=(app, client)=>{
+module.exports=(app, client,bcrypt)=>{
 
 
 	app.get("/signup", (req,res)=>{
-		var firstname = req.body.firstname
-		var lastname = req.body.lastname
-		var email = req.body.email
-		var username = req.body.username
-		var password = req.body.password
+		// var firstname = req.body.firstname
+		// var lastname = req.body.lastname
+		// var email = req.body.email
+		// var username = req.body.username
+		// var password = req.body.password
 
 		res.render("signup") 
 	})
+
 
 
 	app.post("/signup",(req,res)=>{
@@ -19,22 +20,26 @@ module.exports=(app, client)=>{
 		var username = req.body.username
 		var password = req.body.password
 
-console.log("firstname:", req.body.firstname, 
-			" lastname: ", lastname, " email ",email, " username ", username, "password ", password )
-		
+	var salt = bcrypt.genSalt(10, function(error, salt) {
+		console.log("THE SALT", salt)
+
+
+		bcrypt.hash(password, salt, function(err, hash) {
+
+	    // Store hash in your password DB.
+	    	if(err) console.log(err)
+	    	console.log(hash, password)
+				// The query goes here
 			const userCheck ={
-				text:`SELECT * FROM users WHERE username = '${username}' OR email = '${email}'`,
+					text:`SELECT * FROM users WHERE username = '${username}' OR email = '${email}'`,
 			}
 			const insertNewUser =  {
-			text: `INSERT INTO users(firstname, lastname, email, username, password) values('${firstname}','${lastname}','${email}','${username}','${password}');`
-		}
+					text: `INSERT INTO users(firstname, lastname, email, username, password) values('${firstname}','${lastname}','${email}','${username}','${hash}');`
+			}
 
-
+		
 		client.query( userCheck, (err,result)=> {
 
-				// if (err){
-				// 	throw err
-				// }
 
 				if(result.rows != 0){
 					console.log("Username or email is already taken")
@@ -58,7 +63,14 @@ console.log("firstname:", req.body.firstname,
 					
 
 				}
-		})	
+		})		
+	bcrypt.compare(password, hash, function(err, res) {
+	    // res == true
+	  	  console.log("TRUEEEE?", res)
+			});	
+		});	
+	});
+		
 	})
 
 

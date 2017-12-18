@@ -1,6 +1,7 @@
 const express = require("express")
 const app = express()
 const bodyParser = require("body-parser")
+const bcrypt = require("bcrypt")
 const session = require('express-session')
 const pg = require("pg")
 require('dotenv').load();
@@ -26,15 +27,16 @@ app.set("view engine", "pug")
 
 require("./routes/index.js")(app,client)
 require("./routes/navbar.js")(app,client)
-require("./routes/signup.js")(app,client)
+require("./routes/signup.js")(app,client, bcrypt)
 require("./routes/profile.js")(app,client)
-require("./routes/login.js")(app,client)
+require("./routes/login.js")(app,client,bcrypt)
 require("./routes/logout.js")(app)
 require("./routes/messages.js")(app,client)
 require("./routes/posts.js")(app,client)
 require("./routes/userMessages.js")(app,client)
 require("./routes/msg.js")(app,client)
 
-app.listen(process.env.webport, function(){
+app.listen(3002,  function(){
 	console.log("Listening on 3002")
 })
+// process.env.webport,

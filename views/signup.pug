@@ -1,5 +1,9 @@
 html
+	head
+		style
+			include standard.css
 	body
+	
 		include navbar
 		h2 Sign Up!
 		br
@@ -14,9 +18,24 @@ html
 				input(type=text, name="email", placeholder="email")
 			br
 			label Username
-				input(type="text" name="username" placeholder="username")
+				input(type="text" id="username" name="username" placeholder="username")
 			br
 			label Password:
-				input(type="password" name="password" placeholder="Password")
+				input(type="password" id="password" name="password" placeholder="Password")
 			br
+			label PasswordCheck:
+				input(type="password" id="passwordCheck" name="passwordCheck" placeholder="Password")
 			button(type="submit", value= "Submit") Submit
+script(src="https://code.jquery.com/jquery-3.2.1.min.js")
+script.
+		$(document).ready(function() {
+		$("form").submit(function(event) {
+			let username = $("#username").val()
+			let pass = $("#password").val()
+			let passCheck = $("#passwordCheck").val()	
+			if(pass !== passCheck) {
+				event.preventDefault()
+				alert("PASSWORD DOES NOT MATCH")
+			}
+		}) 
+	})
